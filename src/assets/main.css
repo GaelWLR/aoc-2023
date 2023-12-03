@@ -30,3 +30,21 @@ main {
   grid-area: main;
   padding: 1em 2em;
 }
+
+textarea {
+  background-color: transparent;
+  caret-color: var(--color-text);
+  color: var(--color-text);
+}
+
+.dayView-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.dayView-btnContainer {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
