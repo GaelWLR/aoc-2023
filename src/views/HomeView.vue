@@ -1,9 +1,3 @@
-<script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
-</script>
-
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <p>This is my site to try to solve the advent of code 2023</p>
 </template>
