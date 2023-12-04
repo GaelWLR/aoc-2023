@@ -6,7 +6,7 @@ type NavLink = {
   label: string;
 };
 
-const dayNavLinks: NavLink[] = Array.from({ length: 2 }, (_, i) => i + 1).map((i) => ({
+const dayNavLinks: NavLink[] = Array.from({ length: 3 }, (_, i) => i + 1).map((i) => ({
   to: { name: `day-${i}` },
   label: `Day ${i}`,
 }));
