@@ -10,13 +10,26 @@ const partOneRegex = /\d/g;
 // Build a regex with positive lookbehind and lookahead to match all digits even if they share the same letter
 // Could be improved by replace it only when the letter exists in first or last position of another digit
 const plainLetterDigits = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
-const plainLetterDigitGroups = plainLetterDigits.map((digit) => {
-  const letters = digit.split('');
-  const firstLetter = letters.shift();
-  const lastLetter = letters.pop();
+const { plainLetterDigitMatches, plainLetterDigitGroups } = plainLetterDigits.reduce(
+  (acc, digit, index) => {
+    const letters = digit.split('');
+    const firstLetter = letters.shift();
+    const lastLetter = letters.pop();
+    const rest = letters.join('');
 
-  return `(?<=${firstLetter})${letters.join('')}(?=${lastLetter})`;
-});
+    return {
+      plainLetterDigitMatches: {
+        ...acc.plainLetterDigitMatches,
+        [rest]: index + 1,
+      },
+      plainLetterDigitGroups: [
+        ...acc.plainLetterDigitGroups,
+        `(?<=${firstLetter})${rest}(?=${lastLetter})`,
+      ],
+    };
+  },
+  { plainLetterDigitMatches: {} as Record<string, number>, plainLetterDigitGroups: [] as string[] },
+);
 const partTwoRegex = new RegExp(`\\d|(${plainLetterDigitGroups.join('|')})`, 'g');
 
 const formatDigit = (digit: string): string => {
@@ -24,29 +37,7 @@ const formatDigit = (digit: string): string => {
     return digit;
   }
 
-  // As I use positive lookbehind and lookahead, the match will be the middle of the digit
-  switch (digit) {
-    case 'n':
-      return '1';
-    case 'w':
-      return '2';
-    case 'hre':
-      return '3';
-    case 'ou':
-      return '4';
-    case 'iv':
-      return '5';
-    case 'i':
-      return '6';
-    case 'eve':
-      return '7';
-    case 'igh':
-      return '8';
-    case 'in':
-      return '9';
-    default:
-      return '0';
-  }
+  return plainLetterDigitMatches[digit].toString() ?? '0';
 };
 
 const partOneProcess = (lines: string[]) => {
