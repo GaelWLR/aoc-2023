@@ -23,7 +23,7 @@ const processInput = () => {
 
 <template>
   <div class="dayView-container">
-    <h2>Day 2</h2>
+    <h2>Day X</h2>
 
     <textarea v-model="input" rows="10" cols="50"></textarea>
 

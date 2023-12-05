@@ -8,7 +8,7 @@ const routes = [
   },
 ];
 
-const dayRoutes = Array.from({ length: 3 }, (_, i) => i + 1).map((i) => ({
+const dayRoutes = Array.from({ length: 4 }, (_, i) => i + 1).map((i) => ({
   path: `/day-${i}`,
   name: `day-${i}`,
   component: () => import(`../views/Day${i}View.vue`),

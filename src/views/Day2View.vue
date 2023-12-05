@@ -31,8 +31,8 @@ const bag: Bag = {
 };
 
 const parseSet = (line: string): Set => {
-  return line.split(', ').reduce<Set>((acc, colorCount) => {
-    const [count, color] = colorCount.split(' ');
+  return line.trim().split(',').reduce<Set>((acc, colorCount) => {
+    const [count, color] = colorCount.trim().split(' ');
 
     return {
       ...acc,
@@ -42,9 +42,9 @@ const parseSet = (line: string): Set => {
 };
 
 const parseGame = (line: string): Game => {
-  const [lineId, lineSets] = line.split(': ');
-  const id = Number(lineId.split(' ')[1]);
-  const sets = lineSets.split('; ').map(parseSet);
+  const [lineId, lineSets] = line.split(':');
+  const id = Number(lineId.replace('Game', '').trim());
+  const sets = lineSets.split(';').map(parseSet);
 
   return {
     id,
